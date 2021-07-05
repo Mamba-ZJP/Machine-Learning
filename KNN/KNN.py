@@ -8,7 +8,7 @@ def createDataSet():
     # print(group.ndim)
     return group, labels
 
-def classfiy(inX, dataSet, labels, k):  # (分类的输入向量)
+def classify(inX, dataSet, labels, k):  # (分类的输入向量)
     # 1.计算距离
     dataSetSize = dataSet.shape[0]  # shape获取维数大小，shape[0]表示第一维的大小
     diffMat = tile(inX, (dataSetSize, 1)) - dataSet  # tile 这里是纵向铺开，然后矩阵数值直接相减
@@ -20,8 +20,8 @@ def classfiy(inX, dataSet, labels, k):  # (分类的输入向量)
     sortedDistIndices = distances.argsort()  # return the indices that would sort an array
     classCount = {} # dict() 
     for i in range(k):
-        voteIlabel = labels[sortedDistIndices[i]]  # 获取对应的label
-        classCount[voteIlabel] = classCount.get(voteIlabel, 0) + 1  # get(key[, default])
+        cntLabel = labels[sortedDistIndices[i]]  # 获取对应的label
+        classCount[cntLabel] = classCount.get(cntLabel, 0) + 1  # get(key[, default])
     
     # 3.Sort 
     # py内置：(, key, reverse = true => 反向排序) return a new sorted list
