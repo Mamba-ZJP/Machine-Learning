@@ -10,20 +10,40 @@ import operator  # 运算符模块
 # 3) 排序
 
 def createDataset():
-    fileObject = open("E:\Code\Machine-Learning\KNN\iris.txt", 'r')
-    trainDataset = np.empty(4)
-    print(trainDataset)
-    for line in fileObject:
-        trainDataset.append(line)
+    with open("E:\Code\Machine-Learning\KNN\iris.txt", 'r') as fileObject:
+        read = fileObject.read()
+        lines = read.split('\n')
+        dataset, labels, trainLables = [], [], []
+        trainDataset, classifyDataset = [], []
+        # trainDataset = [list(map(float, each[:-1].split(" "))) for each in list(fileObject)]
 
-    return trainDataset 
+        for line in lines:
+           dataset.append(list(map(float, line.split(" "))))
+        
+        labels = [each[0] for each in dataset]
+        dataset = [each[1:] for each in dataset]
+
+        trainDataset.extend(dataset[0:25])
+        trainLables.extend(labels[0:25])
+        classifyDataset.extend(dataset[25: 50])
+
+        trainDataset.extend(dataset[50: 75])
+        trainLables.extend(labels[50: 75])
+        classifyDataset.extend(dataset[75: 100])
+
+        trainDataset.extend(dataset[100:125])
+        trainLables.extend(labels[100: 125])
+        classifyDataset.extend(dataset[125: 150])
+        print("run")
+
+    return trainDataset, classifyDataset, trainLables
 
 
 def classify(inX, dataset, labels, k):
     # 1.计算距离
     datasetSize = dataset.shape[0]  # 这里应该是4维
     # 这里矩阵都支持乘方和减运算
-    diffMat = tile(inX, (datasetSize, 1)) - dataset # 将分类向量纵向捕开成训练数据一样的大小，算出差值矩阵
+    diffMat = np.tile(inX, (datasetSize, 1)) - dataset # 将分类向量纵向捕开成训练数据一样的大小，算出差值矩阵
     sqDiffMat = diffMat ** 2
     sqDistances = sqDiffMat.sum(axis = 1)
     distances = sqDistances ** 0.5
@@ -41,7 +61,14 @@ def classify(inX, dataset, labels, k):
     return sortedClassCount[0][0]
 
 def main():
-    trainDataset = createDataset()
+    trainDataset, classifyDataset, labels = createDataset()
+    npLabels = np.array(labels)
+    npTrainDataset = np.array(trainDataset)
+    npClassifyDataset = np.array(classifyDataset)
+
+    for data in npClassifyDataset:
+        res = classify(data, npTrainDataset, npLabels, 3)
+        print(res)
 
 main()
     

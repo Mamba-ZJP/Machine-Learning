@@ -11,7 +11,7 @@ def createDataSet():
 def classify(inX, dataSet, labels, k):  # (分类的输入向量)
     # 1.计算距离
     dataSetSize = dataSet.shape[0]  # shape获取维数大小，shape[0]表示第一维的大小
-    diffMat = tile(inX, (dataSetSize, 1)) - dataSet  # tile 这里是纵向铺开，然后矩阵数值直接相减
+    diffMat = np.tile(inX, (dataSetSize, 1)) - dataSet  # tile 这里是纵向铺开，然后矩阵数值直接相减
     sqDiffMat = diffMat ** 2  # 直接差值矩阵数值平方
     sqDistances = sqDiffMat.sum(axis = 1)  # 按axis求和,一维数组 ？
     distances = sqDistances ** 0.5
