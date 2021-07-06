@@ -34,6 +34,6 @@ def classify(inX, dataSet, labels, k):  # (分类的输入向量)
 
 def main():
     group, labels = createDataSet()
-    print(classfiy([2, 2], group, labels, 3))
+    print(classify([2, 2], group, labels, 3))
 
 main()
