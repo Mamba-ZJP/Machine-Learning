@@ -3,7 +3,7 @@ import operator  # 运算符模块
 
 
 def createDataSet():
-    group = array( [[1.0, 1.1], [1.0, 1.1], [0, 0], [0, 0.1]] )  # array( [ele1, ele2, ele3] )
+    group = np.array( [[1.0, 1.1], [1.0, 1.1], [0, 0], [0, 0.1]] )  # array( [ele1, ele2, ele3] )
     labels = ['A', 'A', 'B', 'B']
     # print(group.ndim)
     return group, labels
