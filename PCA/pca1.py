@@ -1,8 +1,5 @@
 import numpy as np
 
-# ? 寻找特征向量和特征值的模块linalg，eig()求解特征值和特征现象
-
-
 def createDataset():
     dataset = np.array([[-5, -5], [-5, -4], [-4, -5], [-5, -6],
                        [-6, -5], [5, 5], [5, 4], [4, 5], [5, 6], [6, 5]])  # ? 10*2
@@ -29,11 +26,8 @@ def pca(dataMat, topNFeat=999999):
     reconMat = (lowDDataMat * redEigVects.T) + meanVals
 
     return lowDDataMat, reconMat
-
-
 def main():
     dataset = createDataset()
     lowDDataMat, reconMat = pca(dataset, 1)
-
 
 main()

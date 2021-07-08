@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 
 dataset = []
 
-
 def main():
     dataset_1 = [[5.1418, 0.595], [5.5519, 3.5091], [5.3836, 2.8033], [3.2419, 3.7278], [4.4427, 3.8981], [4.9111, 2.871], [2.9259, 3.4879], [4.2018, 2.4973], [4.7629, 2.5163], [2.7118, 2.4264], [3.047, 1.5699], [4.7782, 3.3504], [3.9937, 4.8529], [4.5245, 2.1322], [5.3643, 2.2477], [4.482, 4.0843], [3.2129, 3.0592], [4.752, 5.3119], [3.8331, 0.4484], [3.1838, 1.4494], [6.0941, 1.8544], [4.0802, 6.2646], [
         3.0627, 3.6474], [4.6357, 2.3344], [5.682, 3.045], [4.5936, 2.5265], [4.7902, 4.4668], [4.1053, 3.0274], [3.8414, 4.2269], [4.8709, 4.0535], [3.8052, 2.6531], [4.0755, 2.8295], [3.4734, 3.1919], [3.3145, 1.8009], [3.7316, 2.6421], [2.8117, 2.8658], [4.2486, 1.4651], [4.1025, 4.4063], [3.959, 1.3024], [1.7524, 1.9339], [3.4892, 1.2457], [4.2492, 4.5982], [4.3692, 1.9794], [4.1792, 0.4113], [3.9627, 4.2198]]
@@ -19,7 +18,6 @@ def main():
     trainDataset, testDataset, trainLabel, testLabel = train_test_split(
         dataset, label, random_state=1, train_size=0.65)
 
-
     clf = svm.SVC(C=0.8, kernel='rbf', gamma=12, decision_function_shape='ovr')
     clf.fit(trainDataset, trainLabel.ravel())
 
@@ -31,9 +29,7 @@ def main():
     y_hat = clf.predict(testDataset)
     # show_accuracy(y_hat, testLabel, '测试集')
 
-    x1_min, x1_max = dataset[:, 0].min(), dataset[:, 0].max()  # 第0列的范围
-
-
+    x1_min, x1_max = dataset[:, 0].min(), dataset[:, 0].max()  
     x2_min, x2_max = dataset[:, 1].min(), dataset[:, 1].max()  # 第1列的范围
     x1, x2 = np.mgrid[x1_min:x1_max:200j, x2_min:x2_max:200j]  # 生成网格采样点
     grid_test = np.stack((x1.flat, x2.flat), axis=1)  # 测试点
@@ -46,7 +42,7 @@ def main():
     cm_light = mpl.colors.ListedColormap(['black', '#FFA0A0', 'white'])
     cm_dark = mpl.colors.ListedColormap(['r', 'r', 'b'])
     plt.pcolormesh(x1, x2, grid_hat, cmap=cm_light)
-    plt.scatter(dataset[:, 0], dataset[:, 1], c=label, edgecolors='k', s=50, cmap=cm_dark)  # 样本
+    plt.scatter(dataset[:, 0], dataset[:, 1], c=label, edgecolors='k', s=50, cmap=cm_dark)  
     plt.scatter(testDataset[:, 0], testDataset[:, 1], s=120, facecolors='none', zorder=10)  # 圈中测试集样本
     plt.xlabel(u'Feature One', fontsize=10)
     plt.ylabel(u'Feature Two', fontsize=10)
@@ -55,6 +51,5 @@ def main():
     plt.title(u'二特征分类', fontsize=13)
     # plt.grid()
     plt.show()
-
 
 main()
